@@ -1,11 +1,14 @@
 package com.pantaleon.registerdaps;
 
+import com.pantaleon.registerdaps.Models.Autenticacion.SignModel;
+import com.pantaleon.registerdaps.Models.Autenticacion.UserModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import io.github.josecarlosbran.LogsJB.LogsJB;
+import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
@@ -13,6 +16,7 @@ import jakarta.ws.rs.core.Application;
 public class HelloApplication extends Application {
 
     public HelloApplication(){
+        LogsJB.setGradeLog(NivelLog.DEBUG);
         Boolean tables_created = true;
         setearDBType();
         setearPropertiesDB();
@@ -45,14 +49,12 @@ public class HelloApplication extends Application {
     }
 
     private void createTables() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        /*
-        LogsModel logs=new LogsModel();
         UserModel usuario=new UserModel();
         SignModel sign=new SignModel();
-        logs.crateTable();
+
         usuario.crateTable();
         sign.crateTable();
-        */
+
     }
 
 
@@ -61,8 +63,8 @@ public class HelloApplication extends Application {
         JBSqlUtils.setDataBaseGlobal("registerdaps");
         JBSqlUtils.setPortGlobal("5075");
         JBSqlUtils.setHostGlobal("localhost");
-        JBSqlUtils.setUserGlobal("bran");
-        JBSqlUtils.setPasswordGlobal("bran");
+        JBSqlUtils.setUserGlobal("root");
+        JBSqlUtils.setPasswordGlobal("root");
     }
 
     private void setearDBType(){
