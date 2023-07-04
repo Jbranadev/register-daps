@@ -1,9 +1,9 @@
 package com.pantaleon.registerdaps.Resources.Autenticacion;
 
+import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Autenticacion.SignController;
 import com.pantaleon.registerdaps.Controllers.Autenticacion.UsuarioController;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
-import io.github.josecarlosbran.LogsJB.LogsJB;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.ws.rs.Consumes;

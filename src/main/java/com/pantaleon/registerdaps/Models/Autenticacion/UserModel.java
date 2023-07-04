@@ -28,6 +28,10 @@ public class UserModel extends JBSqlUtils{
     public UserModel() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
         this.setTableName("Usuarios");
+        this.getUsuario().getDataTypeSQL().setSize("100");
+        this.getPasswordUser().getDataTypeSQL().setSize("200");
+        this.getTokenActual().getDataTypeSQL().setSize("500");
+        this.getTokenAnterior().getDataTypeSQL().setSize("500");
     }
     /**
      * Definiendo los atributos del modelo, uno por cada columna en la tabla correspondiente al modelo

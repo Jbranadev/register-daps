@@ -1,7 +1,7 @@
 package com.pantaleon.registerdaps.Resources.Autenticacion.User;
 
+import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Autenticacion.UsuarioController;
-import io.github.josecarlosbran.LogsJB.LogsJB;
 import jakarta.validation.constraints.Positive;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

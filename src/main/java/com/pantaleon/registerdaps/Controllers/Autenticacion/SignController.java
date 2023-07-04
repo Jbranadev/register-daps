@@ -1,12 +1,12 @@
 package com.pantaleon.registerdaps.Controllers.Autenticacion;
 
+import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Models.Autenticacion.SignModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.LogsJB.LogsJB;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public class SignController {
 
     @Getter
     @Setter
-    private String Key;
+    private String KeySign;
 
     @Getter
     @Setter
@@ -72,7 +72,7 @@ public class SignController {
         try {
             model = (SignModel) model.where("State", Operator.IGUAL_QUE, true).firstOrFail();
             model.llenarControlador(this, model);
-            this.obtenerSecretKeyOfStringKey(this.getKey());
+            this.obtenerSecretKeyOfStringKey(this.getKeySign());
             LogsJB.info("Obtuvo la SecretKey de BD's");
         } catch (ModelNotFound e) {
             try {
@@ -80,7 +80,7 @@ public class SignController {
                 LogsJB.info("No existe la firma almacenada en BD's por lo cual procedera a crear una " + "y almacenarla");
                 SecretKey clave = Keys.secretKeyFor(SignatureAlgorithm.HS512);
                 this.setSecretKey(clave);
-                this.setKey(Base64.getEncoder().encodeToString(clave.getEncoded()));
+                this.setKeySign(Base64.getEncoder().encodeToString(clave.getEncoded()));
                 this.setState(true);
                 //Llenamos el modelo con la información de BD's
                 //this.model.getKey().setValor(this.getKey());

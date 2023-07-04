@@ -1,5 +1,7 @@
 package com.pantaleon.registerdaps;
 
+import com.josebran.LogsJB.LogsJB;
+import com.josebran.LogsJB.Numeracion.NivelLog;
 import com.pantaleon.registerdaps.Models.Autenticacion.SignModel;
 import com.pantaleon.registerdaps.Models.Autenticacion.UserModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
@@ -7,8 +9,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
-import io.github.josecarlosbran.LogsJB.LogsJB;
-import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
@@ -16,7 +16,7 @@ import jakarta.ws.rs.core.Application;
 public class HelloApplication extends Application {
 
     public HelloApplication(){
-        LogsJB.setGradeLog(NivelLog.DEBUG);
+        LogsJB.setGradeLog(NivelLog.INFO);
         Boolean tables_created = true;
         setearDBType();
         setearPropertiesDB();
@@ -61,10 +61,10 @@ public class HelloApplication extends Application {
 
     private void setearPropertiesDB(){
         JBSqlUtils.setDataBaseGlobal("registerdaps");
-        JBSqlUtils.setPortGlobal("5075");
-        JBSqlUtils.setHostGlobal("localhost");
-        JBSqlUtils.setUserGlobal("root");
-        JBSqlUtils.setPasswordGlobal("root");
+        JBSqlUtils.setPortGlobal("5076");
+        JBSqlUtils.setHostGlobal("127.0.0.1");
+        JBSqlUtils.setUserGlobal("Bran");
+        JBSqlUtils.setPasswordGlobal("Bran");
     }
 
     private void setearDBType(){

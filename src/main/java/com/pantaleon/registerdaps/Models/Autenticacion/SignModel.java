@@ -23,6 +23,8 @@ public class SignModel extends JBSqlUtils {
     public SignModel() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
         this.setTableName("Sign");
+        this.getKeySign().getDataTypeSQL().setSize("1000");
+        this.getSubject().getDataTypeSQL().setSize("100");
 
     }
 
@@ -30,7 +32,7 @@ public class SignModel extends JBSqlUtils {
     @Setter
     private Column<Integer> Id=new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
 
-    @Getter @Setter private Column<String> Key=new Column<>(DataType.VARCHAR);
+    @Getter @Setter private Column<String> KeySign=new Column<>(DataType.VARCHAR);
 
     @Getter @Setter private Column<Boolean> State=new Column<>(DataType.BOOLEAN);
 

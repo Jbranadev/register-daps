@@ -1,6 +1,7 @@
 package com.pantaleon.registerdaps.Controllers.Autenticacion;
 
 
+import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Interfaces.IsResource;
 import com.pantaleon.registerdaps.Models.Autenticacion.UserModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
@@ -8,7 +9,6 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.LogsJB.LogsJB;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbTransient;
 import lombok.Getter;
