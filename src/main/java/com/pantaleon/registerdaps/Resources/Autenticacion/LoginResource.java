@@ -23,7 +23,7 @@ import java.util.Objects;
 public class LoginResource {
 
     @Getter
-    private static SignController controlador=new SignController();
+    private static SignController controlador=SignController.getInstance();
 
 
 
@@ -89,7 +89,7 @@ public class LoginResource {
                 //Si la fecha actual es mayor, la key ya vencio
                 LoginResource.controlador.updateKeyToFalse();
                 //Inicializamos el controlador, como un nuevo controlador
-                LoginResource.controlador=new SignController();
+                LoginResource.controlador=SignController.getInstance();
                 //Generaremos la nueva key y se almacenara en BD's
                 LoginResource.controlador.obtenerKeyfromDB();
             }

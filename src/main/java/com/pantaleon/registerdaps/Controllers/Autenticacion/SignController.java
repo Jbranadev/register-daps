@@ -16,6 +16,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.sql.Timestamp;
 import java.util.Base64;
+import java.util.Objects;
 
 public class SignController {
 
@@ -45,11 +46,12 @@ public class SignController {
 
     private SignModel model;
 
+    private static SignController instancia;
 
     /**
      * Inicializamos el modelo correspondiente al controlador en el constructor del mismo
      */
-    public SignController() {
+    private SignController() {
         try {
             this.model = new SignModel();
         } catch (Exception e) {
@@ -62,6 +64,17 @@ public class SignController {
 
     }
 
+    /**
+     * Implementación del patron de diseño singleton, para tener un unico controlador SignController
+     * @return  Una instancia estatica de SignController para el control de claves de autorización de
+     * nuestra aplicación
+     */
+    public static SignController getInstance() {
+        if(Objects.isNull(instancia)){
+            instancia = new SignController();
+        }
+        return instancia;
+    }
 
     /**
      * Busca la key activa
