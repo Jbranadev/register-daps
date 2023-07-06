@@ -15,6 +15,7 @@ public class RegistroModel extends JBSqlUtils {
 
     public RegistroModel() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
+        this.setTableName("Registros");
 
     }
 

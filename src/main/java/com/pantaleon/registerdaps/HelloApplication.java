@@ -4,6 +4,9 @@ import com.josebran.LogsJB.LogsJB;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import com.pantaleon.registerdaps.Models.Autenticacion.SignModel;
 import com.pantaleon.registerdaps.Models.Autenticacion.UserModel;
+import com.pantaleon.registerdaps.Models.Empleado.EmpleadoModel;
+import com.pantaleon.registerdaps.Models.Material.MaterialModel;
+import com.pantaleon.registerdaps.Models.Registro.RegistroModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
@@ -16,7 +19,7 @@ import jakarta.ws.rs.core.Application;
 public class HelloApplication extends Application {
 
     public HelloApplication(){
-        LogsJB.setGradeLog(NivelLog.INFO);
+        LogsJB.setGradeLog(NivelLog.DEBUG);
         Boolean tables_created = true;
         setearDBType();
         setearPropertiesDB();
@@ -49,11 +52,20 @@ public class HelloApplication extends Application {
     }
 
     private void createTables() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        UserModel usuario=new UserModel();
+        /*UserModel usuario=new UserModel();
         SignModel sign=new SignModel();
+        RegistroModel registro=new RegistroModel();*/
+        MaterialModel material=new MaterialModel();
+        EmpleadoModel empleado = new EmpleadoModel();
 
-        usuario.crateTable();
+        /*usuario.crateTable();
         sign.crateTable();
+        registro.crateTable();
+
+*/
+        material.crateTable();
+        empleado.crateTable();
+
 
     }
 
