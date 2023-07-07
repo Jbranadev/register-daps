@@ -30,6 +30,7 @@ public class UserModel extends JBSqlUtils{
         this.setTableName("Usuarios");
         this.getUsuario().getDataTypeSQL().setSize("100");
         this.getPasswordUser().getDataTypeSQL().setSize("200");
+        this.getRol().getDataTypeSQL().setSize("100");
         this.getTokenActual().getDataTypeSQL().setSize("500");
         this.getTokenAnterior().getDataTypeSQL().setSize("500");
     }
@@ -45,6 +46,8 @@ public class UserModel extends JBSqlUtils{
     @Getter @Setter private Column<String> Usuario=new Column<>(DataType.VARCHAR);
 
     @Getter @Setter private Column<String> PasswordUser=new Column<>(DataType.VARCHAR);
+
+    @Getter @Setter private Column<String> Rol=new Column<>(DataType.VARCHAR);
 
     @Getter @Setter private Column<String> TokenActual=new Column<>(DataType.VARCHAR);
 

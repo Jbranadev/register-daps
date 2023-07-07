@@ -19,7 +19,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
 
-@Path("/Login")
+@Path("/login")
 public class LoginResource {
 
     @Getter

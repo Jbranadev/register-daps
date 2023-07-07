@@ -52,17 +52,15 @@ public class HelloApplication extends Application {
     }
 
     private void createTables() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
-        /*UserModel usuario=new UserModel();
+        UserModel usuario=new UserModel();
         SignModel sign=new SignModel();
-        RegistroModel registro=new RegistroModel();*/
+        RegistroModel registro=new RegistroModel();
         MaterialModel material=new MaterialModel();
         EmpleadoModel empleado = new EmpleadoModel();
 
-        /*usuario.crateTable();
+        usuario.crateTable();
         sign.crateTable();
         registro.crateTable();
-
-*/
         material.crateTable();
         empleado.crateTable();
 

@@ -27,16 +27,19 @@ public class UsuarioController implements IsResource {
      * @Setter con esta etiqueta creamos los set por medio de la dependencia lombok
      */
 
-    @JsonbProperty("id_usuario")
+    @JsonbProperty("Id_Usuario")
     @Getter @Setter private Integer Id_Usuario;
 
-    @JsonbProperty("usuario")
+    @JsonbProperty("Usuario")
     @Getter @Setter private String Usuario;
 
-    @JsonbProperty("passworduser")
+    @JsonbProperty("Password")
     @Getter @Setter private String PasswordUser;
 
-    @JsonbTransient
+    @JsonbProperty("Rol")
+    @Getter @Setter private String Rol;
+
+    @JsonbProperty("token")
     @Getter @Setter private String TokenActual;
 
     @JsonbTransient

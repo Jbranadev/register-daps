@@ -1,42 +1,34 @@
-package com.pantaleon.registerdaps.Controllers.Registro;
+package com.pantaleon.registerdaps.Controllers.Empleado;
 
 import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Interfaces.IsResource;
-import com.pantaleon.registerdaps.Models.Registro.RegistroModel;
+import com.pantaleon.registerdaps.Models.Empleado.EmpleadoModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import jakarta.json.bind.annotation.JsonbProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+public class EmpleadoController implements IsResource {
 
-public class RegistroController implements IsResource {
-    private RegistroModel model;
-
-    @JsonbProperty("Id_Registro")
-    @Getter @Setter private Integer Id_Registro;
-
-    @JsonbProperty("Id_Usuario")
-    @Getter @Setter private Integer Id_Usuario;
-
-    @JsonbProperty("Id_Material")
-    @Getter @Setter private Integer Id_Material;
-
+    private EmpleadoModel model ;
     @JsonbProperty("Ficha")
-    @Getter @Setter private Integer Ficha;
+    @Getter @Setter
+    private Integer Ficha;
 
-    @JsonbProperty("Cantidad_Existente")
-    @Getter @Setter private Integer Cantidad_Existente;
+    @JsonbProperty("Nombre")
+    @Getter @Setter
+    private String Nombre;
 
-    @JsonbProperty("Cantidad_Entregada")
-    @Getter @Setter private Integer Cantidad_Entregada;
+    @JsonbProperty("Puesto")
+    @Getter @Setter
+    private String Puesto;
 
-    @JsonbProperty("Fecha_Entrega")
-    @Getter @Setter private Timestamp Fecha_Entrega;
 
-    public RegistroController() {
+
+
+    public EmpleadoController()  {
         try{
-            this.model = new RegistroModel();
+            this.model = new EmpleadoModel();
         }catch (Exception e) {
             LogsJB.fatal("Excepción disparada al inicializar el controlador: "+ e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -46,11 +38,9 @@ public class RegistroController implements IsResource {
         }
     }
 
-
-
     public void get(Integer id){
         try{
-            model.where("Id_Registro", Operator.IGUAL_QUE, id).get();
+            model.where("Ficha", Operator.IGUAL_QUE, id).get();
             while(!model.getTaskIsReady()){
 
             }
@@ -80,10 +70,6 @@ public class RegistroController implements IsResource {
         model.llenarModelo(this, model);
         model.delete();
     }
-
-
-
-
 
 
 }
