@@ -3,7 +3,9 @@ package com.pantaleon.registerdaps.Controllers.Autenticacion;
 
 import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Interfaces.IsResource;
+import com.pantaleon.registerdaps.Controllers.Material.MaterialController;
 import com.pantaleon.registerdaps.Models.Autenticacion.UserModel;
+import com.pantaleon.registerdaps.Models.Material.MaterialModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
@@ -16,6 +18,8 @@ import lombok.Setter;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * se implementan los metodos de la interfaz IsResource
@@ -98,6 +102,29 @@ public class UsuarioController implements IsResource {
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
     }
+
+    public List<UsuarioController> getAllUsers(){
+        try{
+            List<UsuarioController> usuarios=new ArrayList<>();
+            List<UserModel> modelos=this.model.getAll();
+            while(!model.getTaskIsReady()){
+            }
+            modelos.forEach(modelo->{
+                UsuarioController temp= new UsuarioController();
+                modelo.llenarControlador(temp, modelo);
+                usuarios.add(temp);
+            });
+            return usuarios;
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al obtener la lista de Usuarios de la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            return new ArrayList<UsuarioController>();
+        }
+    }
+
     public void save(){
         model.llenarModelo(this, model);
         model.save();

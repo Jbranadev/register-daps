@@ -2,11 +2,16 @@ package com.pantaleon.registerdaps.Controllers.Empleado;
 
 import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Interfaces.IsResource;
+import com.pantaleon.registerdaps.Controllers.Material.MaterialController;
 import com.pantaleon.registerdaps.Models.Empleado.EmpleadoModel;
+import com.pantaleon.registerdaps.Models.Material.MaterialModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import jakarta.json.bind.annotation.JsonbProperty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmpleadoController implements IsResource {
 
@@ -54,6 +59,28 @@ public class EmpleadoController implements IsResource {
         }
     }
 
+
+    public List<EmpleadoController> getAllEmpleados(){
+        try{
+            List<EmpleadoController> empleados=new ArrayList<>();
+            List<EmpleadoModel> modelos=this.model.getAll();
+            while(!model.getTaskIsReady()){
+            }
+            modelos.forEach(modelo->{
+                EmpleadoController temp= new EmpleadoController();
+                modelo.llenarControlador(temp, modelo);
+                empleados.add(temp);
+            });
+            return empleados;
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al obtener la lista de empleados de la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            return new ArrayList<EmpleadoController>();
+        }
+    }
 
     public void save(){
         model.llenarModelo(this, model);

@@ -1,14 +1,36 @@
 package com.pantaleon.registerdaps.Resources.Registro;
 
 import com.josebran.LogsJB.LogsJB;
+import com.pantaleon.registerdaps.Controllers.Material.MaterialController;
 import com.pantaleon.registerdaps.Controllers.Registro.RegistroController;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Path("/registro")
 public class RegistroResource {
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response get(){
+        try{
+            RegistroController registro=new RegistroController();
+            List<RegistroController> registros =new ArrayList<>();
+            registros=registro.getAllRegistros();
+            return Response.ok().entity(registros).build();
+        }catch (Exception e){
+            LogsJB.fatal("Excepción disparada al tratar de obtener los registros: "+": " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).
+                    entity("Excepción disparada al tratar de obtener los registros: ").build();
+        }
+    }
 
 
     /**

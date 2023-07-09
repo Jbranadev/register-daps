@@ -2,6 +2,8 @@ package com.pantaleon.registerdaps.Controllers.Registro;
 
 import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Interfaces.IsResource;
+import com.pantaleon.registerdaps.Controllers.Material.MaterialController;
+import com.pantaleon.registerdaps.Models.Material.MaterialModel;
 import com.pantaleon.registerdaps.Models.Registro.RegistroModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import jakarta.json.bind.annotation.JsonbProperty;
@@ -9,6 +11,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistroController implements IsResource {
     private RegistroModel model;
@@ -64,6 +68,28 @@ public class RegistroController implements IsResource {
         }
     }
 
+
+    public List<RegistroController> getAllRegistros(){
+        try{
+            List<RegistroController> registros=new ArrayList<>();
+            List<RegistroModel> modelos=this.model.getAll();
+            while(!model.getTaskIsReady()){
+            }
+            modelos.forEach(modelo->{
+                RegistroController temp= new RegistroController();
+                modelo.llenarControlador(temp, modelo);
+                registros.add(temp);
+            });
+            return registros;
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al obtener la lista de Registros de la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            return new ArrayList<RegistroController>();
+        }
+    }
 
     public void save(){
         model.llenarModelo(this, model);

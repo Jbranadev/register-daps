@@ -28,7 +28,7 @@ public class LoginResource {
 
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response post(UsuarioController usuario)
     {
@@ -60,7 +60,7 @@ public class LoginResource {
                 usuario.setTokenAnterior(usuario.getTokenActual());
                 usuario.setTokenActual(jwtToken);
                 usuario.update();
-                return Response.status(Response.Status.OK).entity(jwtToken).build();
+                return Response.status(Response.Status.OK).entity(usuario).build();
             }catch (ModelNotFound e){
                 return Response.status(Response.Status.UNAUTHORIZED).entity("Credenciales No Validas").build();
             }

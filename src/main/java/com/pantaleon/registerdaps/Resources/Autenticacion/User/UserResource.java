@@ -2,10 +2,14 @@ package com.pantaleon.registerdaps.Resources.Autenticacion.User;
 
 import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Autenticacion.UsuarioController;
+import com.pantaleon.registerdaps.Controllers.Empleado.EmpleadoController;
 import jakarta.validation.constraints.Positive;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Path con  esta etiqueta  creamos  la rutas /Usuarios
@@ -42,6 +46,26 @@ public class UserResource {
             return Response.serverError().entity("Sucedio un error al obtener el Log").build();
         }
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response get(){
+        try{
+            UsuarioController usuario=new UsuarioController();
+            List<UsuarioController> usuarios =new ArrayList<>();
+            usuarios=usuario.getAllUsers();
+            return Response.ok().entity(usuarios).build();
+        }catch (Exception e){
+            LogsJB.fatal("Excepción disparada al tratar de obtener los Usuarios: "+": " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).
+                    entity("Excepción disparada al tratar de obtener los Usuarios: ").build();
+        }
+    }
+
 
     /**
      * @return retorna una respuesta http con el estado correspondiente

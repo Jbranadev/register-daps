@@ -8,6 +8,9 @@ import jakarta.json.bind.annotation.JsonbProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MaterialController implements IsResource {
 
     private MaterialModel model;
@@ -57,6 +60,28 @@ public class MaterialController implements IsResource {
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
+
+    public List<MaterialController> getAllMaterials(){
+        try{
+            List<MaterialController> materiales=new ArrayList<>();
+            List<MaterialModel> modelos=this.model.getAll();
+            while(!model.getTaskIsReady()){
+            }
+            modelos.forEach(modelo->{
+                MaterialController temp= new MaterialController();
+                modelo.llenarControlador(temp, modelo);
+                materiales.add(temp);
+            });
+            return materiales;
+        }catch (Exception e) {
+            LogsJB.fatal("Excepción disparada al obtener la lista de materiales de la BD's: " + e.toString());
+            LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            return new ArrayList<MaterialController>();
         }
     }
 
