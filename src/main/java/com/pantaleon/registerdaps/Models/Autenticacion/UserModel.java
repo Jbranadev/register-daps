@@ -27,12 +27,13 @@ public class UserModel extends JBSqlUtils{
 
     public UserModel() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
-        this.setTableName("Usuarios");
+        this.setTableName("Usuario");
         this.getUsuario().getDataTypeSQL().setSize("100");
         this.getPasswordUser().getDataTypeSQL().setSize("200");
         this.getRol().getDataTypeSQL().setSize("100");
         this.getTokenActual().getDataTypeSQL().setSize("500");
         this.getTokenAnterior().getDataTypeSQL().setSize("500");
+
     }
     /**
      * Definiendo los atributos del modelo, uno por cada columna en la tabla correspondiente al modelo
@@ -47,7 +48,7 @@ public class UserModel extends JBSqlUtils{
 
     @Getter @Setter private Column<String> PasswordUser=new Column<>(DataType.VARCHAR);
 
-    @Getter @Setter private Column<String> Rol=new Column<>(DataType.VARCHAR);
+    @Getter @Setter private Column<String> Rol=new Column<>(DataType.VARCHAR, "'Despachador'", Constraint.DEFAULT);
 
     @Getter @Setter private Column<String> TokenActual=new Column<>(DataType.VARCHAR);
 

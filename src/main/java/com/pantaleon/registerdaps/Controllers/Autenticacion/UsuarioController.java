@@ -3,9 +3,7 @@ package com.pantaleon.registerdaps.Controllers.Autenticacion;
 
 import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Interfaces.IsResource;
-import com.pantaleon.registerdaps.Controllers.Material.MaterialController;
 import com.pantaleon.registerdaps.Models.Autenticacion.UserModel;
-import com.pantaleon.registerdaps.Models.Material.MaterialModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ModelNotFound;
@@ -13,8 +11,7 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbTransient;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.ToString;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -24,30 +21,25 @@ import java.util.List;
 /**
  * se implementan los metodos de la interfaz IsResource
  */
+@ToString
 public class UsuarioController implements IsResource {
-    /**
-     * Definiendo los atributos del modelo,
-     * * @Getter con esta etiqueta creamos los get por medio de la dependencia lombok
-     * @Setter con esta etiqueta creamos los set por medio de la dependencia lombok
-     */
 
-    @JsonbProperty("Id_Usuario")
-    @Getter @Setter private Integer Id_Usuario;
+    private Integer Id_Usuario;
 
-    @JsonbProperty("Usuario")
-    @Getter @Setter private String Usuario;
 
-    @JsonbProperty("Password")
-    @Getter @Setter private String PasswordUser;
+    private String Usuario;
 
-    @JsonbProperty("Rol")
-    @Getter @Setter private String Rol;
 
-    @JsonbProperty("token")
-    @Getter @Setter private String TokenActual;
+    private String PasswordUser;
+
+
+    private String Rol;
+
+
+     private String TokenActual;
 
     @JsonbTransient
-    @Getter @Setter private String TokenAnterior;
+    private String TokenAnterior;
 
     private UserModel model;
 
@@ -61,6 +53,56 @@ public class UsuarioController implements IsResource {
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
+    }
+
+
+    @JsonbProperty("Id_Usuario")
+    public Integer getId_Usuario() {
+        return Id_Usuario;
+    }
+    @JsonbProperty("Id_Usuario")
+    public void setId_Usuario(Integer id_Usuario) {
+        Id_Usuario = id_Usuario;
+    }
+    @JsonbProperty("Usuario")
+    public String getUsuario() {
+        return Usuario;
+    }
+    @JsonbProperty("Usuario")
+    public void setUsuario(String usuario) {
+        Usuario = usuario;
+    }
+    @JsonbProperty("Password")
+    public String getPasswordUser() {
+        return PasswordUser;
+    }
+    @JsonbProperty("Password")
+    public void setPasswordUser(String passwordUser) {
+        PasswordUser = passwordUser;
+    }
+    @JsonbProperty("Rol")
+    public String getRol() {
+        return Rol;
+    }
+    @JsonbProperty("Rol")
+    public void setRol(String rol) {
+        Rol = rol;
+    }
+    @JsonbProperty("token")
+    public String getTokenActual() {
+        return TokenActual;
+    }
+    @JsonbProperty("token")
+    public void setTokenActual(String tokenActual) {
+        TokenActual = tokenActual;
+    }
+
+    public String getTokenAnterior() {
+        return TokenAnterior;
+    }
+
+    public void setTokenAnterior(String tokenAnterior) {
+        TokenAnterior = tokenAnterior;
     }
 
     /**
@@ -103,7 +145,8 @@ public class UsuarioController implements IsResource {
         }
     }
 
-    public List<UsuarioController> getAllUsers(){
+
+    public List<UsuarioController> obtenerAllUsers(){
         try{
             List<UsuarioController> usuarios=new ArrayList<>();
             List<UserModel> modelos=this.model.getAll();
@@ -163,5 +206,7 @@ public class UsuarioController implements IsResource {
 
         return sb.toString();
     }
+
+
 
 }

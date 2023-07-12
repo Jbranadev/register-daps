@@ -1,8 +1,8 @@
 package com.pantaleon.registerdaps.Resources.Registro;
 
 import com.josebran.LogsJB.LogsJB;
-import com.pantaleon.registerdaps.Controllers.Material.MaterialController;
 import com.pantaleon.registerdaps.Controllers.Registro.RegistroController;
+import com.pantaleon.registerdaps.Resources.Autenticacion.Authorize;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+@Authorize
 @Path("/registro")
 public class RegistroResource {
 
@@ -19,7 +20,7 @@ public class RegistroResource {
         try{
             RegistroController registro=new RegistroController();
             List<RegistroController> registros =new ArrayList<>();
-            registros=registro.getAllRegistros();
+            registros=registro.obtenerAllRegistros();
             return Response.ok().entity(registros).build();
         }catch (Exception e){
             LogsJB.fatal("Excepción disparada al tratar de obtener los registros: "+": " + e.toString());
@@ -38,7 +39,8 @@ public class RegistroResource {
      * @Produces con esta etiqueta se esta enviando dato  tipo JSON
      * @Consumes especificamos el tipo de de formato JSON
      */
-    @PUT()
+    @Path("/guardar")
+    @POST()
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response save(RegistroController registro) {
@@ -60,6 +62,9 @@ public class RegistroResource {
             return Response.serverError().entity("Sucedio un error al crear el usuario").build();
         }
     }
+
+
+
     /**
      * @return retorna una respuesta http con el estado correspondiente
      * @Produces con esta etiqueta se esta enviando dato  tipo JSON

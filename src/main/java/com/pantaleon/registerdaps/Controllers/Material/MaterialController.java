@@ -5,8 +5,6 @@ import com.pantaleon.registerdaps.Controllers.Interfaces.IsResource;
 import com.pantaleon.registerdaps.Models.Material.MaterialModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import jakarta.json.bind.annotation.JsonbProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,25 +12,9 @@ import java.util.List;
 public class MaterialController implements IsResource {
 
     private MaterialModel model;
-
-    @JsonbProperty("Id_Material")
-    @Getter
-    @Setter
     private Integer Id_Material;
-
-    @JsonbProperty("Descripcion")
-    @Getter
-    @Setter
     private String Descripcion;
-
-    @JsonbProperty("Id_Tarjeta_NFC")
-    @Getter
-    @Setter
     private Integer Id_Tarjeta_NFC;
-
-    @JsonbProperty("Cantidad_Existente")
-    @Getter
-    @Setter
     private Integer Cantidad_Existente;
 
     public MaterialController() {
@@ -46,7 +28,6 @@ public class MaterialController implements IsResource {
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
     }
-
     public void get(Integer id){
         try{
             model.where("Id_Material", Operator.IGUAL_QUE, id).get();
@@ -62,8 +43,7 @@ public class MaterialController implements IsResource {
             LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
     }
-
-    public List<MaterialController> getAllMaterials(){
+    public List<MaterialController> obtenerAllMaterials(){
         try{
             List<MaterialController> materiales=new ArrayList<>();
             List<MaterialModel> modelos=this.model.getAll();
@@ -84,23 +64,50 @@ public class MaterialController implements IsResource {
             return new ArrayList<MaterialController>();
         }
     }
-
-
     public void save(){
         model.llenarModelo(this, model);
         model.save();
     }
-
     public void update(){
         model.setModelExist(true);
         model.llenarModelo(this, model);
         model.save();
     }
-
     public void delete(){
         model.llenarModelo(this, model);
         model.delete();
     }
 
-
+    @JsonbProperty("Id_Material")
+    public Integer getId_Material() {
+        return Id_Material;
+    }
+    @JsonbProperty("Id_Material")
+    public void setId_Material(Integer id_Material) {
+        Id_Material = id_Material;
+    }
+    @JsonbProperty("Descripcion")
+    public String getDescripcion() {
+        return Descripcion;
+    }
+    @JsonbProperty("Descripcion")
+    public void setDescripcion(String descripcion) {
+        Descripcion = descripcion;
+    }
+    @JsonbProperty("Id_Tarjeta_NFC")
+    public Integer getId_Tarjeta_NFC() {
+        return Id_Tarjeta_NFC;
+    }
+    @JsonbProperty("Id_Tarjeta_NFC")
+    public void setId_Tarjeta_NFC(Integer id_Tarjeta_NFC) {
+        Id_Tarjeta_NFC = id_Tarjeta_NFC;
+    }
+    @JsonbProperty("Cantidad_Existente")
+    public Integer getCantidad_Existente() {
+        return Cantidad_Existente;
+    }
+    @JsonbProperty("Cantidad_Existente")
+    public void setCantidad_Existente(Integer cantidad_Existente) {
+        Cantidad_Existente = cantidad_Existente;
+    }
 }

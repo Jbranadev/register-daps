@@ -2,33 +2,19 @@ package com.pantaleon.registerdaps.Controllers.Empleado;
 
 import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Interfaces.IsResource;
-import com.pantaleon.registerdaps.Controllers.Material.MaterialController;
 import com.pantaleon.registerdaps.Models.Empleado.EmpleadoModel;
-import com.pantaleon.registerdaps.Models.Material.MaterialModel;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Operator;
 import jakarta.json.bind.annotation.JsonbProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmpleadoController implements IsResource {
-
     private EmpleadoModel model ;
-    @JsonbProperty("Ficha")
-    @Getter @Setter
     private Integer Ficha;
 
-    @JsonbProperty("Nombre")
-    @Getter @Setter
     private String Nombre;
-
-    @JsonbProperty("Puesto")
-    @Getter @Setter
     private String Puesto;
-
-
 
 
     public EmpleadoController()  {
@@ -60,7 +46,7 @@ public class EmpleadoController implements IsResource {
     }
 
 
-    public List<EmpleadoController> getAllEmpleados(){
+    public List<EmpleadoController> obtenerAllEmpleados(){
         try{
             List<EmpleadoController> empleados=new ArrayList<>();
             List<EmpleadoModel> modelos=this.model.getAll();
@@ -98,5 +84,28 @@ public class EmpleadoController implements IsResource {
         model.delete();
     }
 
-
+    @JsonbProperty("Ficha")
+    public Integer getFicha() {
+        return Ficha;
+    }
+    @JsonbProperty("Ficha")
+    public void setFicha(Integer ficha) {
+        Ficha = ficha;
+    }
+    @JsonbProperty("Nombre")
+    public String getNombre() {
+        return Nombre;
+    }
+    @JsonbProperty("Nombre")
+    public void setNombre(String nombre) {
+        Nombre = nombre;
+    }
+    @JsonbProperty("Puesto")
+    public String getPuesto() {
+        return Puesto;
+    }
+    @JsonbProperty("Puesto")
+    public void setPuesto(String puesto) {
+        Puesto = puesto;
+    }
 }

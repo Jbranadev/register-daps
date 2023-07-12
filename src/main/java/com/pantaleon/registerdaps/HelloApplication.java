@@ -57,14 +57,11 @@ public class HelloApplication extends Application {
         RegistroModel registro=new RegistroModel();
         MaterialModel material=new MaterialModel();
         EmpleadoModel empleado = new EmpleadoModel();
-
         usuario.crateTable();
         sign.crateTable();
         registro.crateTable();
         material.crateTable();
         empleado.crateTable();
-
-
     }
 
 

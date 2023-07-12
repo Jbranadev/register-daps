@@ -2,7 +2,6 @@ package com.pantaleon.registerdaps.Resources.Autenticacion.User;
 
 import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Autenticacion.UsuarioController;
-import com.pantaleon.registerdaps.Controllers.Empleado.EmpleadoController;
 import jakarta.validation.constraints.Positive;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -53,7 +52,7 @@ public class UserResource {
         try{
             UsuarioController usuario=new UsuarioController();
             List<UsuarioController> usuarios =new ArrayList<>();
-            usuarios=usuario.getAllUsers();
+            usuarios=usuario.obtenerAllUsers();
             return Response.ok().entity(usuarios).build();
         }catch (Exception e){
             LogsJB.fatal("Excepción disparada al tratar de obtener los Usuarios: "+": " + e.toString());
@@ -72,6 +71,7 @@ public class UserResource {
      * @Produces con esta etiqueta se esta enviando dato  tipo JSON
      * @Consumes especificamos el tipo de de formato JSON
      */
+    @Path("/guardar")
     @PUT()
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -82,6 +82,7 @@ public class UserResource {
                         "al contenido solicitado por el servidor.").build();
             }
             user.save();
+            LogsJB.info("Usuario creado: "+user.toString());
             return Response.status(Response.Status.CREATED).entity(user).build();
 
         } catch (Exception e) {

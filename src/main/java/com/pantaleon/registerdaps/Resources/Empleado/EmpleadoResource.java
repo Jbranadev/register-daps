@@ -2,7 +2,7 @@ package com.pantaleon.registerdaps.Resources.Empleado;
 
 import com.josebran.LogsJB.LogsJB;
 import com.pantaleon.registerdaps.Controllers.Empleado.EmpleadoController;
-import com.pantaleon.registerdaps.Controllers.Material.MaterialController;
+import com.pantaleon.registerdaps.Resources.Autenticacion.Authorize;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -12,6 +12,8 @@ import jakarta.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Authorize
 @Path("/empleado")
 public class EmpleadoResource {
 
@@ -21,7 +23,7 @@ public class EmpleadoResource {
         try{
             EmpleadoController empleado=new EmpleadoController();
             List<EmpleadoController> empleados =new ArrayList<>();
-            empleados=empleado.getAllEmpleados();
+            empleados=empleado.obtenerAllEmpleados();
             return Response.ok().entity(empleados).build();
         }catch (Exception e){
             LogsJB.fatal("Excepción disparada al tratar de obtener los empleados: "+": " + e.toString());
